@@ -1,7 +1,7 @@
 from flask import Flask
 from sqlalchemy import BigInteger, Column, Float, Integer, Text
 from flask_sqlalchemy import SQLAlchemy
-from flask import render_template
+from flask import render_template, request
 
 app = Flask(__name__,
 template_folder="../client/templates",
