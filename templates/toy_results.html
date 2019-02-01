@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div style="padding-left:16px">
+<p>Toys</p>
+</div>
+
+<ul>
+{% for thing in options %}
+  <li>{{ thing.name }}</li>
+{% endfor %}  
+</ul>
+{% endblock %}
