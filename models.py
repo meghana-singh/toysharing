@@ -1,10 +1,8 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///toy_share.db'
 db = SQLAlchemy(app)
+
 
 class Parent(db.Model):
     __tablename__ = 'parent'
@@ -13,6 +11,7 @@ class Parent(db.Model):
     name = db.Column(db.Text(255))
     city = db.Column(db.Text(255))
     mail = db.Column(db.Text(150))
+
 class Toy(db.Model):
     __tablename__ = 'toy'
 
@@ -31,5 +30,5 @@ class ToyParent(db.Model):
     id_parent = db.Column(db.Integer, nullable=False)
 
  
-db.create_all()
-db.session.commit()
+#db.create_all()
+#db.session.commit()
