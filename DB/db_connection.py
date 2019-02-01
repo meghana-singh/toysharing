@@ -6,26 +6,6 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///toy_share.db'
 db = SQLAlchemy(app)
 
-
-class Forbes(db.Model):
-
-    __tablename__ = 'forbes'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
-    country = db.Column(db.String)
-    sales = db.Column(db.Float)
-    profits = db.Column(db.Float)
-    assets = db.Column(db.Float)
-    marketvalue = db.Column(db.Float)
-
-    def __repr__(self):
-        return (f"<Forbes(name='{self.name}',"
-                f" country={self.country}, profits=={self.profits}>")
-
-#db.create_all()
-
-
-
 class Parent(db.Model):
     __tablename__ = 'parent'
 
@@ -51,8 +31,5 @@ class ToyParent(db.Model):
     id_parent = db.Column(db.Integer, nullable=False)
 
  
-
-db.session.add(new_bean)
+db.create_all()
 db.session.commit()
-
-#C
