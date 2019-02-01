@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+  
+        
+        <div style="padding-left:16px">
+        <h1>Find a Toy</h1>
+        <form action='/query'>
+            Age Level:
+            <br>
+            <div style="padding-left:32px">
+            <input type="radio" name="agel" value="Infant(0-12 months)"> Infant<br>
+                    <input type="radio" name="agel" value="Toddler(1-3 years)"> Toddler<br>
+                    <input type="radio" name="agel" value="Preschool(3-5 years)"> Preschool<br>
+                    <input type="radio" name="agel" value="Gradeschool(5-12 years)"> Gradeschool<br>
+                    <input type="radio" name="agel" value="Teen(12-18 years)"> Teen<br> 
+            </div>
+            <br>
+            Category: 
+            <br>
+            <div style="padding-left:32px">
+            <input type="radio" name="catl" value="ArtsandCrafts">Arts and Crafts<br>
+                    <input type="radio" name="catl" value="Construction">Construction<br>
+                    <input type="radio" name="catl" value="Dolls">Dolls<br>
+                    <input type="radio" name="catl" value="Educational">Educational<br>
+                    <input type="radio" name="catl" value="Electronic">Electronic<br>
+                    <input type="radio" name="catl" value="Puzzles">Puzzles<br>
+             </div>
+
+            <br>
+            <input type="submit" value="Upload Toy">
+        </form>
+    </div>
+
+{% endblock %}
+   

@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <div style="padding-left:16px">
+        <h1>Toys Registry</h1>
+        <form action='/upload'>
+            ToyName:    <input type="text" name=toyname>
+             <br>
+             <br>
+            Desc:       <input type="text" name=desc>
+             <br>
+             <br>
+             Age Level:     <select cat="catdropdown">
+                <option value="Infant(0-12 months)">Infant(0-12 months)</option>
+                <option value="Toddler(1-3 years)">Toddler(1-3 years)</option>
+                <option value="Preschool(3-5 years)">Preschool(3-5 years)</option>
+                <option value="Gradeschool(5-12 years)">Gradeschool(5-12 years)</option>
+                <option value="Teen(12-18 years)">Teen(12-18 years)</option>
+            </select>
+            <br>
+            <br>
+            Category:      <select cat="catdropdown">
+                <option value="ArtsandCrafts">Arts and Crafts</option>
+                <option value="Construction">Construction</option>
+                <option value="Dolls">Dolls</option>
+                <option value="Educational">Educational</option>
+                <option value="Electronic">Electronic</option>
+                <option value="Puzzles">Puzzles</option>
+            </select>
+            
+
+        <br>
+        <br>
+        <input type="submit" value="Upload Toy">
+       </form>
+    </div>
+{% endblock %}
