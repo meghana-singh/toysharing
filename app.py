@@ -1,5 +1,10 @@
-from flask import request, render_template
+from flask import request, render_template, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.utils import secure_filename
+import os
+
+UPLOAD_FOLDER = '//Users/sujathamudupalli/source/toysharing/uploads'
+
 
 from server import create_app
 #from models import Parent, Toy, ToyParent
@@ -7,6 +12,8 @@ from server import create_app
 app = create_app()
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///toy_share.sqlite'
+app.config['SECRET_KEY'] = 'fhdfghdhfyrye567rygd'
+
 db = SQLAlchemy(app)
 
 
@@ -36,15 +43,15 @@ class ToyParent(db.Model):
     id_toy = db.Column(db.Integer, nullable=False)
     id_parent = db.Column(db.Integer, nullable=False)
 
-#db.create_all()
+# db.create_all()
 
 def update_user_table(user_name, user_email, user_city):
     db.session.add(Parent(name = user_name, city = user_city, mail = user_email))
     db.session.commit()
 
-def update_toy_table(toyname, desc, agedropdown, catdropdown):
+def update_toy_table(toyname, pic, agedropdown, catdropdown):
     print("called update_toy_table")
-    db.session.add(Toy(name = toyname, desc = desc, age_cat = agedropdown, type_cat = catdropdown))
+    db.session.add(Toy(name = toyname, picture = pic, age_cat = agedropdown, type_cat = catdropdown))
     db.session.commit()
 
 def query_toy_table(agel, catl):
@@ -61,16 +68,34 @@ def toyupload():
     print("printing from toyupload fn")
     return render_template('toy_upload.html')
 
-@app.route('/toyupload_user', methods=['POST'])
+@app.route('/toyupload_user', methods=['GET', 'POST'])
 def toyupload_user():
+    if request.method == 'GET':
+        return render_template('/toyupload_user.html')
     print("printing from toyuploaduser fn")
     toyname = request.form['toyname']
-    desc = request.form['desc']
     agedropdown = request.form['agedropdown']
     catdropdown = request.form['catdropdown']
     print("agedrop %s" % agedropdown)
-    update_toy_table(toyname, desc, agedropdown, catdropdown)
+    # check if the post request has the file part
+    #import pdb; pdb.set_trace()
+    if 'pic' not in request.files:
+        flash('No file')
+        return redirect(request.url)
+   
+    file = request.files['pic']
+    # if user does not select file, browser also
+    # submit an empty part without filename
+    if file.filename == '':
+        flash('No selected file')
+        return redirect(request.url)
+    if file:
+        filename = secure_filename(file.filename)
+        pic_name = file.save(os.path.join(UPLOAD_FOLDER, filename))
+    print("picname %s" % pic_name)
+    update_toy_table(toyname, pic_name, agedropdown, catdropdown)
     return render_template('/toyupload_user.html')
+    
 
 @app.route('/toy_query')
 def toyquery():

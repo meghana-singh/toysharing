@@ -4,9 +4,8 @@
 
     <div style="padding-left:16px">
         <h1>Lend a Toy</h1>
-        <form action="/toyupload_user", method="POST">
+        <form action="/toyupload_user" method="POST" enctype="multipart/form-data">
             <p>ToyName:    <input type="text" name=toyname></p>
-            <p>Desc:       <input type="text" name=desc></p>
              <p>Age Level:     <select name="agedropdown">
                 <option value="Infant(0-12 months)">Infant(0-12 months)</option>
                 <option value="Toddler(1-3 years)">Toddler(1-3 years)</option>
@@ -25,6 +24,9 @@
                 <option value="Puzzles">Puzzles</option>
             </select>
 
+            </p>
+            <p>
+                Picture: <input type="file" name="pic" accept="image/*">
             </p>
         <br>
         <input type="submit" value="Lend">
